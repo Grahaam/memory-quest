@@ -61,6 +61,14 @@ func collect_fragment(chapter_id: StringName, fragment_id: StringName) -> void:
 	fragment_collected.emit(chapter_id, fragment_id)
 
 
+func has_fragment(chapter_id: StringName, fragment_id: StringName) -> bool:
+	return fragment_id in collected_fragments.get(chapter_id, [])
+
+
+func fragment_count(chapter_id: StringName) -> int:
+	return collected_fragments.get(chapter_id, []).size()
+
+
 func complete_chapter(chapter_id: StringName) -> void:
 	current_chapter_id = _next_chapter_after(chapter_id)
 	chapter_completed.emit(chapter_id)

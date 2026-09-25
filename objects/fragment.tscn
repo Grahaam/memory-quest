@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" uid="uid://dfpisimsgf5ce" path="res://objects/coin.tscn" id="1_coin"]
+[ext_resource type="Script" path="res://objects/fragment.gd" id="2_frag"]
+
+[node name="fragment" instance=ExtResource("1_coin")]
+script = ExtResource("2_frag")
