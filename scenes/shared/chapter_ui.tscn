@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/chapter_ui.gd" id="1_ui"]
+[ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="2_font"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_caption"]
+font = ExtResource("2_font")
+font_size = 30
+outline_size = 10
+outline_color = Color(0.35, 0.12, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("2_font")
+font_size = 72
+outline_size = 16
+outline_color = Color(0.35, 0.12, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sub"]
+font = ExtResource("2_font")
+font_size = 34
+outline_size = 10
+outline_color = Color(0.35, 0.12, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_end"]
+font = ExtResource("2_font")
+font_size = 34
+font_color = Color(0.45, 0.16, 0.3, 1)
+
+[node name="ChapterUI" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_ui")
+
+[node name="Caption" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -150.0
+offset_right = -80.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_caption")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Card" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 150.0
+offset_bottom = 300.0
+grow_horizontal = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Card"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Card"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_sub")
+horizontal_alignment = 1
+
+[node name="Ending" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.93, 0.9, 0.92)
+
+[node name="Box" type="VBoxContainer" parent="Ending"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Date" type="Label" parent="Ending/Box"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Ending/Box"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_end")
+horizontal_alignment = 1
+
+[node name="Stats" type="Label" parent="Ending/Box"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_end")
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Ending/Box"]
+layout_mode = 2
+text = "Press jump to walk this memory again"
+label_settings = SubResource("LabelSettings_end")
+horizontal_alignment = 1

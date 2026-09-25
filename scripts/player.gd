@@ -21,6 +21,9 @@ var jump_double = true
 
 var coins = 0
 
+## Set to false during cutscenes (e.g. the chapter ending) to freeze input.
+var controls_enabled := true
+
 @onready var particles_trail = $ParticlesTrail
 @onready var sound_footsteps = $SoundFootsteps
 @onready var model = $Character
@@ -106,6 +109,10 @@ func handle_effects(delta):
 # Handle movement input
 
 func handle_controls(delta):
+
+	if not controls_enabled:
+		movement_velocity = Vector3.ZERO
+		return
 
 	# Movement
 

@@ -29,6 +29,12 @@ var unlocked_abilities: Dictionary = {}
 ## chapter_id -> Array[StringName] of collected fragment ids
 var collected_fragments: Dictionary = {}
 
+## chapter_id -> Vector3 respawn position of the last checkpoint reached
+var checkpoints: Dictionary = {}
+
+## chapter_id -> Array[StringName] of memory zones (title cards) already shown
+var seen_zones: Dictionary = {}
+
 
 func unlock_companion(companion_id: StringName) -> void:
 	if unlocked_companions.get(companion_id, false):
@@ -69,7 +75,33 @@ func fragment_count(chapter_id: StringName) -> int:
 	return collected_fragments.get(chapter_id, []).size()
 
 
+func set_checkpoint(chapter_id: StringName, position: Vector3) -> void:
+	checkpoints[chapter_id] = position
+
+
+func get_checkpoint(chapter_id: StringName) -> Variant:
+	return checkpoints.get(chapter_id)
+
+
+## Returns true the first time a zone is seen in this chapter, false after.
+func mark_zone_seen(chapter_id: StringName, zone_id: StringName) -> bool:
+	var zones: Array = seen_zones.get(chapter_id, [])
+	if zone_id in zones:
+		return false
+	zones.append(zone_id)
+	seen_zones[chapter_id] = zones
+	return true
+
+
+## Forget all progress inside a chapter (used by "play again").
+func reset_chapter(chapter_id: StringName) -> void:
+	collected_fragments.erase(chapter_id)
+	checkpoints.erase(chapter_id)
+	seen_zones.erase(chapter_id)
+
+
 func complete_chapter(chapter_id: StringName) -> void:
+	checkpoints.erase(chapter_id)
 	current_chapter_id = _next_chapter_after(chapter_id)
 	chapter_completed.emit(chapter_id)
 
